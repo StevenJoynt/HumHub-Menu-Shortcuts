@@ -1,0 +1,12 @@
+{
+    "id": "shortcuts",
+    "name": "Shortcuts",
+    "description": "Space Menu Keyboard Shortcuts",
+    "keywords": [
+    ],
+    "version": "0.1",
+    "humhub": {
+        "minVersion": "1.2"
+    },
+    "screenshots": []
+}
