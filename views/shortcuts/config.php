@@ -124,7 +124,7 @@ function shortcutsAutomatic() {
                 case 'Z' :
                     break lastAttempt;
                 default :
-                    ch ++;
+                    ch = String.fromCharCode(ch.charCodeAt(0) + 1);
             }
         }
         document.getElementById("shortcuts-key-" + i).value = ch;
