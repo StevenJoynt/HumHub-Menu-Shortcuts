@@ -2,15 +2,22 @@
 use humhub\compat\CActiveForm;
 use yii\helpers\Html;
 ?>
+<style>
+.shortcuts-table, td {
+    padding: 4px;
+}
+#shortcuts-key, input {
+    text-align: center;
+}
+</style>
 <div class="panel panel-default">
     <div class="panel-heading">
-        Space Menu Shortcut Keys Configuration
+        <strong>Space</strong> menu : Shortcut Keys Configuration
     </div>
     <div class="panel-body">
-        <form>
-            <table id="shortcuts-table">
-            </table>
-        </form>
+        <table id="shortcuts-table">
+        </table>
+        <br>
 <?php
 $form = CActiveForm::begin();
 echo $form->hiddenField($model, 'json', ['id'=>'shortcuts-json']);
@@ -45,13 +52,25 @@ function shortcutsJsonToForm() {
     var i;
     for ( i = 0 ; i < items.length ; i++ ) {
         var title = items[i].innerText.trim();
-        var tr = table.insertRow();
-        var td = tr.insertCell();
         var key = shortcuts[title];
-        key = key ? key : "" ;
-        td.innerHTML = "<input id=\"shortcuts-key-" + i + "\" value=\"" + key + "\" type=\"text\" maxlength=\"1\" size=\"1\">";
-        td = tr.insertCell();
-        td.innerText = title;
+        var tr = table.insertRow();
+        {
+            var td = tr.insertCell();
+            td.className = "shortcuts-key";
+            var input = document.createElement("input");
+            td.appendChild(input);
+            input.type = "text";
+            input.id = "shortcuts-key-" + i;
+            input.maxlength = input.size = 1;
+            input.onfocus = function() { this.select(); };
+            if ( key ) {
+                input.value = key;
+            }
+        }
+        {
+            var td = tr.insertCell();
+            td.innerText = title;
+        }
     }
 }
 shortcutsJsonToForm();
