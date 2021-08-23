@@ -22,18 +22,18 @@ class Module extends \humhub\modules\content\components\ContentContainerModule
     /**
     * @inheritdoc
     */
-    public function DELETEDgetConfigUrl()
+    public function getContentContainerConfigUrl(ContentContainerActiveRecord $container)
     {
-        return Url::to(['/shortcuts/admin']);
+        return $container->createUrl('/shortcuts/shortcuts/config');
     }
 
     /**
     * @inheritdoc
     */
-    public function disable()
+    public function enableContentContainer(ContentContainerActiveRecord $container)
     {
-        // Cleanup all module data, don't remove the parent::disable()!!!
-        parent::disable();
+        $container->setSetting('json', '{}', 'shortcuts');
+        parent::enableContentContainer($container);
     }
 
     /**
