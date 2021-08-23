@@ -28,6 +28,8 @@ use yii\helpers\Html;
 $form = CActiveForm::begin();
 echo $form->hiddenField($model, 'json', ['id'=>'shortcuts-json']);
 echo Html::submitButton('Save', ['class'=>'btn btn-primary', 'id'=>'shortcuts-save']);
+echo " ";
+echo Html::submitButton('Auto', ['class'=>'btn btn-primary', 'id'=>'shortcuts-auto']);
 CActiveForm::end();
 ?>
     </div>
@@ -71,6 +73,66 @@ function shortcutsFormToJson() {
     }
 }
 document.getElementById("shortcuts-save").onclick = shortcutsFormToJson;
+
+function shortcutsAutomatic() {
+    var table = document.getElementById("shortcuts-table");
+    var menu = document.getElementById("space-main-menu");
+    var items = menu.getElementsByTagName("A");
+    var usedKeys = "";
+    var i;
+    var t = 0;
+    var ch;
+    var wip = true; // work in progress
+    for ( i = 0 ; i < items.length ; i++ ) {
+        var key = document.getElementById("shortcuts-key-" + i).value.trim().toUpperCase();
+        if ( key ) usedKeys += key;
+    }
+    while ( wip ) {
+        wip = false;
+        for ( i = 0 ; i < items.length ; i++ ) {
+            var key = document.getElementById("shortcuts-key-" + i).value.trim().toUpperCase();
+            if ( key ) continue; // skip already defined
+            var title = items[i].innerText.trim();
+            if ( title.length <= t ) continue; // no unique letters remaining in title
+            ch = title.charAt(t).toUpperCase();
+            if ( ( ch >= '0' && ch <= '9' ) || ( ch >= 'A' && ch <= 'Z' ) ) {
+                if ( usedKeys.includes(ch) ) {
+                    wip = true; // possible key already used - try other characters
+                } else {
+                    document.getElementById("shortcuts-key-" + i).value = ch;
+                    usedKeys += ch;
+                }
+            } else {
+                wip = true; // punctuation in title - try other characters
+            }
+        }
+        t++; // try the next character in the titles
+    }
+    ch = '1';
+    lastAttempt:
+    for ( i = 0 ; i < items.length ; i++ ) {
+        var key = document.getElementById("shortcuts-key-" + i).value.trim();
+        if ( key ) continue; // skip already defined
+        while ( usedKeys.includes(ch) ) {
+            switch ( ch ) {
+                case '9' :
+                    ch = '0';
+                    break;
+                case '0' :
+                    ch = 'A';
+                    break;
+                case 'Z' :
+                    break lastAttempt;
+                default :
+                    ch ++;
+            }
+        }
+        document.getElementById("shortcuts-key-" + i).value = ch;
+        usedKeys += ch;
+    }
+    return shortcutsFormToJson(); // save the config if valid
+}
+document.getElementById("shortcuts-auto").onclick = shortcutsAutomatic;
 
 function shortcutsJsonToForm() {
     var shortcuts = document.getElementById("shortcuts-json").value.trim();
