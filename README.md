@@ -18,18 +18,18 @@ At this point, the module is ready for use, but doesn't do anything! It needs to
 
 ## How do I use it?
 
-This module works inside a HumHub Space.
-This module works in a HumHub Space.You need to be a site administrator, or the owner of a Space, in order to set it up.
+This module works in a HumHub Space.
+
+You need to be a site administrator, or the owner of a Space, in order to set it up.
 
 1. Open the Space configuration menu by clicking on the cog wheel on the right just under the banner image.
-1. Open the Space configuration menu by clicking on the cog wheel on the right just under the banner.
+2. Select `Modules` from the menu.
 3. Find the `Shortcut Keys` module within the list.
 4. Ensure the module is Enabled.
 5. Click on the `Configure` button to show the current settings.
 6. You can assign a letter or number key to each of the options in the Space menu.
 7. Don't forget to hit the `Save` button when you're done.
-7. Don't forget to hit the `Save` button when you're done!
+
 You can now activate a menu item by pressing Alt+`key` or Alt+Shift+`key` (depending on your browser).
 
 Tip: If you hover your mouse over an entry in the Space menu, it will reveal the shortcut key sequence.
-
