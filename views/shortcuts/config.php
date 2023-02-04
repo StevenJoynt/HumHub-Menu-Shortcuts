@@ -1,5 +1,5 @@
 <?php
-use humhub\compat\CActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 ?>
 <style>
@@ -25,12 +25,12 @@ use yii\helpers\Html;
         </table>
         <br>
 <?php
-$form = CActiveForm::begin();
-echo $form->hiddenField($model, 'json', ['id'=>'shortcuts-json']);
+$form = ActiveForm::begin();
+echo $form->field($model, 'json')->hiddenInput(['id'=>'shortcuts-json'])->label(false);
 echo Html::submitButton('Save', ['class'=>'btn btn-primary', 'id'=>'shortcuts-save']);
 echo " ";
 echo Html::submitButton('Auto', ['class'=>'btn btn-primary', 'id'=>'shortcuts-auto']);
-CActiveForm::end();
+ActiveForm::end();
 ?>
     </div>
 </div>
