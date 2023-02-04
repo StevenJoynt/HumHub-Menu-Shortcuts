@@ -26,7 +26,7 @@ class Events
     public static function afterSpaceMenuRun($event)
     {
         $container = $event->sender->space;
-        $json = $container->getSetting('json', 'shortcuts');
+        $json = $container->getSettings()->get('shortcuts');
         $src = <<<END
 <script>
 function shortcutsJsonToMenu(shortcuts) {

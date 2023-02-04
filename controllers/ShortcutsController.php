@@ -18,9 +18,9 @@ class ShortcutsController extends ContentContainerController
     {
         $container = $this->contentContainer;
         $form = new ConfigureForm();
-        $form->json = $container->getSetting('json', 'shortcuts');
+        $form->json = $container->getSettings()->get('shortcuts');
         if ( $form->load(Yii::$app->request->post()) && $form->validate() ) {
-            $container->setSetting('json', $form->json, 'shortcuts');
+            $container->getSettings()->set('shortcuts', $form->json);
             return $this->redirect($container->createUrl('/shortcuts/shortcuts/config'));
         }
         return $this->render('config', array('model' => $form));
