@@ -4,9 +4,9 @@
     "description": "Space Menu Keyboard Shortcuts",
     "keywords": [
     ],
-    "version": "0.1",
+    "version": "0.1.2",
     "humhub": {
-        "minVersion": "1.2"
+        "minVersion": "1.13.0"
     },
     "screenshots": []
 }
