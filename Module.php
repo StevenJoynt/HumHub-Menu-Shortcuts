@@ -32,7 +32,7 @@ class Module extends \humhub\modules\content\components\ContentContainerModule
     */
     public function enableContentContainer(ContentContainerActiveRecord $container)
     {
-        $container->setSetting('json', '{}', 'shortcuts');
+        $container->getSettings()->set('shortcuts', '{}');
         parent::enableContentContainer($container);
     }
 
